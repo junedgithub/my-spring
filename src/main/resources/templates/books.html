@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <h1 align="center" style="color:red">BOOK STORE</h1>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col" align="left">
+            <a href="addbook"><button class="btn btn-primary">ADD BOOK</button></a>
+        </div>
+        <div class="col">
+            <input type="text" id="search" onkeyup="return searchBook()" class="form-control">
+        </div>
+        <div class="col" align="right">
+            <div class="dropdown">
+                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="color:blue">
+                    Sort
+                </button>
+                <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
+                    <li><a href="sortname" class="dropdown-item">Sort By Name</a></li>
+                    <li><a href="sortprice" class="dropdown-item" >Sort By Price</a></li>
+                </ul>
+        </div>
+    </div>
+        <div class="col" align="right">
+            <a href="logout"><button class="btn btn-danger">LOGOUT</button></a>
+        </div>
+    <hr>
+    <div class="row">
+        <div class="col-4" id="cardContainer" th:each="book:${books}">
+            <div class="card">
+                <div class="card-header">
+                    <h1 th:text="${book.bookName}" style="color:red"></h1>
+                </div>
+                <hr>
+                <div class="card-body">
+                    <h4 style="color:green"> Price:<span th:text="${book.bookPrice}"></span></h4>
+                    <h4 style="color:green"> Category:<span th:text="${book.bookCategory}"></span></h4>
+                </div>
+            <div class="card-footer">
+               <a th:href="@{/updateform/{id}(id=${book.bookId})}"><button class="btn btn-warning mx-5">UPDATE</button></a>
+                <a th:href="@{/deletebook/{id}(id=${book.bookId})}"><button class="btn btn-danger">DELETE</button></a>
+            </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+</div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
